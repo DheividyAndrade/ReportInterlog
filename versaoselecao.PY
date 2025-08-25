@@ -33,7 +33,7 @@ from datetime import datetime
 # ========== CONFIG ==========
 
 # Nome do seu JSON de credenciais
-ARQUIVO_CREDENCIAIS = 'soy-surge-397101-7168ac4eb8ad.json'
+ARQUIVO_CREDENCIAIS = 'soy-surge-397101-970c2a316ba9.json'
 # ID da sua planilha Google
 ID_PLANILHA = '1M-VbVx94Y86uNnBUXDjPoEk1VB4kF6YyIQ8n9nkad2k'
 NOME_ABA = 'Página1'  # Nome da aba na planilha
