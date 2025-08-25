@@ -188,7 +188,7 @@ def corteva():
     pyautogui.hotkey('ctrl', 't')
     sleep(1)
     pyautogui.click(328,491,duration=0.5)
-    sleep(3)
+    sleep(5)
     pyautogui.click(82,115, duration=1)
     sleep(2)
 
@@ -249,7 +249,7 @@ def Stine():
     pyautogui.hotkey('ctrl', 't')
     sleep(1)
     pyautogui.click(328,491,duration=0.5)
-    sleep(3)
+    sleep(5)
     pyautogui.click(82,115, duration=1)
     sleep(2)
 
