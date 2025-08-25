@@ -170,7 +170,6 @@ def Stine():
     sleep(1)
     pyautogui.press('enter')
 
-
 def whatsapp():
     # Seu código pyautogui para enviar via WhatsApp aqui
     print("Enviando via WhatsApp...")
