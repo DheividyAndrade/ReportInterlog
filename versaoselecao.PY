@@ -27,8 +27,8 @@ from google.oauth2.service_account import Credentials
 import sys
 from datetime import datetime
 
-'''
 
+'''
 # ========== CONFIG ==========
 
 # Nome do seu JSON de credenciais
@@ -117,8 +117,8 @@ if verificar_chave(chave_digitada):
 else:
     pyautogui.alert("❌ Chave inválida, inativa ou expirada. Bot bloqueado.")
     sys.exit()
-'''
 
+'''
 import tkinter as tk
 from tkinter import messagebox
 import pyautogui
