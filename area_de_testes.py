@@ -7,29 +7,33 @@ from datetime import datetime, time
 
 executar_corteva = False
 executar_stine = False
+executar_LP = False
 parar_execucao = False
 
 def escolher_opcoes():
     def iniciar():
-        global executar_corteva, executar_stine
+        global executar_corteva, executar_stine, executar_LP
         executar_corteva = var_corteva.get()
         executar_stine = var_stine.get()
-        if not executar_corteva and not executar_stine:
+        executar_LP = var_LP.get()
+        if not executar_corteva and not executar_stine and not executar_LP:
             messagebox.showwarning("Atenção", "Você precisa selecionar ao menos uma opção.")
         else:
             janela.destroy()
 
     janela = tk.Tk()
     janela.title("Selecionar Relatórios")
-    janela.geometry("300x200")
+    janela.geometry("300x250")
 
     tk.Label(janela, text="Selecione os relatórios que deseja enviar:").pack(pady=10)
 
     var_corteva = tk.BooleanVar()
     var_stine = tk.BooleanVar()
+    var_LP = tk.BooleanVar()
 
     tk.Checkbutton(janela, text="Corteva + WhatsApp", variable=var_corteva).pack(anchor='w', padx=20)
     tk.Checkbutton(janela, text="Stine + WhatsApp", variable=var_stine).pack(anchor='w', padx=20)
+    tk.Checkbutton(janela, text="LP + WhatsApp", variable=var_LP).pack(anchor='w', padx=20)
 
     tk.Button(janela, text="Iniciar", command=iniciar).pack(pady=20)
     janela.mainloop()
@@ -170,6 +174,68 @@ def Stine():
     sleep(1)
     pyautogui.press('enter')
 
+def LP():
+    # Seu código pyautogui para Corteva aqui
+    print("Executando Corteva...")
+    # Coletando Informações Report
+    pyautogui.press('win')
+    sleep(1)
+    pyautogui.typewrite('google')
+    sleep(1)
+    pyautogui.press('enter')
+    sleep(1)
+    pyautogui.click(533,518, duration=0.5)
+    sleep(2)
+    pyautogui.hotkey('ctrl', 't')
+    sleep(1)
+    pyautogui.click(328,491,duration=0.5)
+    sleep(3)
+    pyautogui.click(82,115, duration=1)
+    sleep(2)
+
+    #Clicando em busca
+    pyautogui.click(1254,251, duration=0.5)
+    sleep(1)
+    pyautogui.typewrite('REPORT_OPERACIONAL_CARREGAMENTO_LP')
+    sleep(0.5)
+    pyautogui.click(438,353, duration=1)
+    sleep(3)
+    pyautogui.click(1318,849)
+    sleep(0.5)
+    pyautogui.typewrite('60')
+    sleep(0.5)
+    pyautogui.press('enter')
+    sleep(0.5)
+    pyautogui.click(15,800)
+
+    #Abrindo captura
+    pyautogui.hotkey('win')
+    sleep(1)
+    pyautogui.typewrite('ferramenta de captura')
+    sleep(1)
+    pyautogui.press('enter')
+    sleep(1)
+    pyautogui.click(491,503, duration=0.5)
+    sleep(1.7)
+
+    #Arrastando print e copiando
+    pyautogui.moveTo(33,234)  # Coordenada inicial
+    pyautogui.mouseDown()
+    pyautogui.moveTo(1370,469, duration=0.5)  # Coordenada final
+    pyautogui.mouseUp()
+    sleep(1)
+    pyautogui.press('printscreen')
+    sleep(1)
+    pyautogui.click(509,60,duration=0.5)
+    sleep(1)
+    pyautogui.hotkey('ctrl', 'c')
+    sleep(1)
+    pyautogui.hotkey('alt', 'f4')
+    sleep(1)
+    pyautogui.hotkey('tab')
+    sleep(1)
+    pyautogui.press('enter')
+
 def whatsapp():
     # Seu código pyautogui para enviar via WhatsApp aqui
     print("Enviando via WhatsApp...")
@@ -219,17 +285,19 @@ def Lembrar_Amanda():
     sleep(1)
     pyautogui.hotkey('alt','f4')
     sleep(1)
+
      
-# Início
+# === Início da execução principal ===
+
 escolher_opcoes()
 
-if not executar_corteva and not executar_stine:
+if not executar_corteva and not executar_stine and not executar_LP:
     pyautogui.alert("Nenhuma opção foi selecionada. O programa será encerrado.", title="Aviso", button="OK")
     exit()
 
 threading.Thread(target=interface_parada, daemon=True).start()
 
-# Cria lista de horários: 08:30, 10:30, ..., 22:30, 00:30
+# Horários fixos: 08:30, 10:30, ..., 22:30, 00:30
 horarios_execucao = [time(h, 30) for h in range(8, 24, 2)]
 horarios_execucao.append(time(0, 30))
 
@@ -254,11 +322,16 @@ while not parar_execucao:
             print('Report Stine Enviado')
             sleep(0.3)
 
+        if executar_LP:
+            LP()
+            whatsapp()
+            print('Report LP Enviado')
+            sleep(0.3)
+
         pyautogui.alert("O REPORT FOI LANÇADO COM SUCESSO!", title="Alerta", button="OK")
 
         ultimo_horario_executado = hora_atual
 
-        # Espera 5 minutos (300 segundos) antes de lembrar a Amanda
         for _ in range(300):
             if parar_execucao:
                 break
