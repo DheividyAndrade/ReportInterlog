@@ -110,6 +110,7 @@ if verificar_chave(chave_digitada):
 else:
     pyautogui.alert("❌ Chave inválida, inativa ou expirada. Bot bloqueado.")
     sys.exit()
+
 '''
     # Funções do APP
 def corteva():
