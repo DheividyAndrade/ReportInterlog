@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "soy-surge-397101",
+  "private_key_id": "7168ac4eb8ad236fe02d2bb3e48d5c2744a50453",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDSUhDx2ZHTwXsM\nyBu9aIK4CtC1DbrB9QJDnjtUWi7e/b1OjQCS6p8y+FwdPKibbGjwoD8SMfvCwut2\nmX3hCR/rC7Oiwr0csKv/Y3KNaydNNmJQ5UMA1L9yTN+zJUTSjeb0qhwq+uWMSZfl\nmlfc9Wl7c72/7btQJdbhnxxM5fscXvxorpQsm1I9vj2SaJ09f6MRpWpJWarnuwga\nQFqgpCXRowPMShx4qmr34ER7qHcefcpdVRMX2XYdWn6witEV0GK0TDlQVKsvAbIb\nEXN1OwxI3pFfg+GFGzKZ7IM76EymW9TlLU/nsQ8ePn0Oyrwa+r0ueKT8NxAds0im\nn0C4HA7RAgMBAAECggEAMkerRF46phCNrb8THqNjCMORJI+NM7wyl962mVJb/TRU\n8vfziKvtdj54qwaq2kk/BzOQEHYBlYyKxRYpyUgoqMTp44HBux+jZtEr/BH/Wc6k\nD2nXrFWwFQ+6tPW2b827xob6Z+4GPZUEasAMvEaxOnGvjbg0PRNmvRaQKfQbJatC\nmigFx42wpmzC+LAiTxv5Euoq/Z2HmydH96OQYiaucmJGCpr1ryzPpNaxNZB+7hKg\n3juKopSUuuDR7xJ7G/TT0h9ll5cu4xY2V5G5/mcsmL+AjPc1jhtRHtVBukzVOs0V\nVzEuUOAwwBgk0dEXDlOJLKJk80R3/Ypz/FPSGPJXHwKBgQDuBOcSeVwlVc0IxzYm\nZd+h6j1+lbxQoiCW8RAlohAp3n4OFyNuGJ03bW9vp90Zrvnd5tqEzDe/4pD+4169\ngflZzQ8sj9HAkW/OhYcFNp1w3Wh9nMHQ0tjiEcZoPKvUj0k0kksjUzgHnUgumvvN\nERx3kqpwN0nft0f5DcPVWol6RwKBgQDiNX7YfqJHmEWgUSe+2tsLZHqwMDYsQbdg\nnk9K6ypleDXKby1LP8PCCzURktdf6PEY7uUCnV/9M3+0ZnaOsFyZE3+v60R7v0jx\nNOx/59EzAuLvQjwrnmaAw4VIShIEuPXAgAE8Sh6YkeIrWwwWLFOuBhXDiqk2WPbo\nUX9MVysiJwKBgAnNY+LL4rKa7P2+jolYSrR1XCD5c67yblspBFw4Z2gCBLj51Pi0\nxMzCkgNMK3viS+IKntc3PdiGMSh+Hqm5T5aWLljMd3vxwWQE9cGONT+vrpz1trmt\n5UayKrSiQwVW/VHP8I484CLYJF/e/B2+5ag6/w/uBvnSp4EnQvhnaSADAoGBAIok\n71UZaNNeS88PIL2ufCzl7QMiPkMi0vFfXL89BIQ5OGhrIvccdtlO7NbRnVQGNw7p\n/dNt9ovz4l5yYJ7dV39oaAcwH3+PHuWnU3L9SEXl0l8ZTRO6RZEHVqMCESTvK62m\nvppqDWtRVBT0Ilp8MZJKRwpG6PW2uPrBooMljMLrAoGAEzhaEOVwrfKrprTEZ2r/\n7OFreCkNUTThmsbNU1EYwZD5QUrIeGOmIlhfeuS5NPTWrNqn/JOzrwX6iiFqEeR4\nVgz2gEGVCvvs8gs37YjKjfxvkmKmZ0w/iOT+kFOF2hfvztm2vsnNy2NJ1dqVQ5tD\naYO4JSF4UOdVnZFx1WJz/p4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "projetobot@soy-surge-397101.iam.gserviceaccount.com",
+  "client_id": "115432709734432554945",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/projetobot%40soy-surge-397101.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
