@@ -105,7 +105,9 @@ def corteva():
     sleep(1)
     pyautogui.hotkey('alt', 'f4')
     sleep(1)
-    pyautogui.click(849,322,duration=1)
+    pyautogui.hotkey('tab')
+    sleep(1)
+    pyautogui.press('enter')
 
 def Stine():
     # Seu código pyautogui para Stine aqui
@@ -162,6 +164,12 @@ def Stine():
     sleep(1)
     pyautogui.hotkey('ctrl', 'c')
     sleep(1)
+    pyautogui.hotkey('alt', 'f4')
+    sleep(1)
+    pyautogui.hotkey('tab')
+    sleep(1)
+    pyautogui.press('enter')
+
 
 def whatsapp():
     # Seu código pyautogui para enviar via WhatsApp aqui
