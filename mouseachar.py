@@ -19,6 +19,7 @@ pyautogui.press('enter')
 sleep(1)
 # Digitar 'mouseInfo()'
 pyautogui.typewrite('mouseInfo()')
+pyautogui.press('enter')
 
 
 #fim

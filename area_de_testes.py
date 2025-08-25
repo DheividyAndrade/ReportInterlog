@@ -91,7 +91,7 @@ def corteva():
     sleep(1.7)
     pyautogui.moveTo(33,234)
     pyautogui.mouseDown()
-    pyautogui.moveTo(1327,437, duration=0.5)
+    pyautogui.moveTo(1345,424, duration=0.5)  # Coordenada final
     pyautogui.mouseUp()
     sleep(1)
     pyautogui.press('printscreen')
