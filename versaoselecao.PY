@@ -145,7 +145,7 @@ def interface_parada():
 # === Suas funções existentes ===
 
 def corteva():
-     # Coletando Informações Report
+      # Coletando Informações Report
         pyautogui.press('win')
         sleep(1)
         pyautogui.typewrite('google')
@@ -160,6 +160,7 @@ def corteva():
         sleep(3)
         pyautogui.click(82,115, duration=1)
         sleep(2)
+
         #Clicando em busca
         pyautogui.click(1254,251, duration=0.5)
         sleep(1)
@@ -167,6 +168,13 @@ def corteva():
         sleep(0.5)
         pyautogui.click(438,353, duration=1)
         sleep(3)
+        pyautogui.click(1318,849)
+        sleep(0.5)
+        pyautogui.typewrite('60')
+        sleep(0.5)
+        pyautogui.press('enter')
+        sleep(0.5)
+        pyautogui.click(15,800)
 
         #Abrindo captura
         pyautogui.hotkey('win')
@@ -214,9 +222,16 @@ def Stine():
     pyautogui.click(1254,251, duration=0.5)
     sleep(1)
     pyautogui.typewrite('REPORT_OPERACIONAL_CARREGAMENTO_STINE_A')
-    sleep(1)
+    sleep(0.5)
     pyautogui.click(438,353, duration=1)
     sleep(3)
+    pyautogui.click(1318,849)
+    sleep(0.5)
+    pyautogui.typewrite('60')
+    sleep(0.5)
+    pyautogui.press('enter')
+    sleep(0.5)
+    pyautogui.click(15,800)
 
     #Abrindo captura
     pyautogui.hotkey('win')
