@@ -4,6 +4,28 @@ import pyautogui
 from time import sleep
 import threading
 from datetime import datetime, time
+import pyautogui
+from time import sleep
+import tkinter as tk
+from tkinter import scrolledtext
+import threading
+import queue
+import time
+import pyautogui._pyautogui_win
+import random
+from tkinter import ttk
+from tkinter import messagebox
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+import os
+import json
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+import requests
+from google.oauth2.service_account import Credentials
+import sys
+from datetime import datetime
+
 
 executar_corteva = False
 executar_stine = False
@@ -76,7 +98,7 @@ def corteva():
     pyautogui.typewrite('REPORT_OPERACIONAL_CARREGAMENTO_CO')
     sleep(0.5)
     pyautogui.click(438,353, duration=1)
-    sleep(3)
+    sleep(10)
     pyautogui.click(1318,849)
     sleep(0.5)
     pyautogui.typewrite('60')
@@ -137,7 +159,7 @@ def Stine():
     pyautogui.typewrite('REPORT_OPERACIONAL_CARREGAMENTO_STINE_A')
     sleep(0.5)
     pyautogui.click(438,353, duration=1)
-    sleep(3)
+    sleep(10)
     pyautogui.click(1318,849)
     sleep(0.5)
     pyautogui.typewrite('60')
@@ -199,9 +221,9 @@ def LP():
     pyautogui.typewrite('REPORT_OPERACIONAL_CARREGAMENTO_LP')
     sleep(0.5)
     pyautogui.click(438,353, duration=1)
-    sleep(3)
+    sleep(10)
     pyautogui.click(1318,849)
-    sleep(0.5)
+    sleep(1)
     pyautogui.typewrite('60')
     sleep(0.5)
     pyautogui.press('enter')
