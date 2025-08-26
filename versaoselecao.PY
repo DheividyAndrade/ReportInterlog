@@ -5,10 +5,6 @@ from time import sleep
 import tkinter as tk
 from tkinter import messagebox
 import threading
-import os
-import sys
-import pyautogui
-from time import sleep
 import tkinter as tk
 from tkinter import scrolledtext
 import threading
@@ -28,7 +24,9 @@ import requests
 from google.oauth2.service_account import Credentials
 import sys
 from datetime import datetime
-
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 # ========== CONFIG ==========
 
@@ -389,29 +387,34 @@ def whatsapp():
 
 
 def Lembrar_Amanda():
-    # Seu código para lembrar Amanda no WhatsApp
-    print("Lembrando Amanda...")
-    sleep(1)
-    pyautogui.hotkey('win')
-    sleep(1)
-    pyautogui.typewrite('whatsapp')
-    sleep(1)
-    pyautogui.press('enter')
-    sleep(5)
-    pyautogui.typewrite('amanda')
-    sleep(1)
-    pyautogui.hotkey('tab')
-    sleep(1)
-    pyautogui.press('enter')
-    sleep(1)
-    pyautogui.typewrite('[BOT] Report vai ser enviado em 5 minutos!')
-    sleep(0.5)
-    pyautogui.press('enter')
-    sleep(1)
-    pyautogui.click(780, 18, duration=0.5)
-    sleep(1)
-    pyautogui.hotkey('alt', 'f4')
-    sleep(1)
+    # Configurações do remetente (quem envia)
+    email_remetente = "deividyandradee@gmail.com"
+    senha = "vlpn jeuk bslb jeso"  # não é a senha normal! É a senha de APP do Gmail
+
+    # Configurações do destinatário (quem recebe)
+    email_destinatario = "deividyandrade@hotmail.com"
+
+    # Criando o e-mail
+    mensagem = MIMEMultipart()
+    mensagem["From"] = email_remetente
+    mensagem["To"] = email_destinatario
+    mensagem["Subject"] = "REPORT ALERTA!"
+
+    # Corpo do e-mail
+    corpo = "O REPORT SERA ENVIADO EM 5 MINUTOS!. 🚀"
+    mensagem.attach(MIMEText(corpo, "plain"))
+
+    # Conectando ao servidor do Gmail e enviando
+    try:
+        servidor = smtplib.SMTP("smtp.gmail.com", 587)
+        servidor.starttls()
+        servidor.login(email_remetente, senha)
+        servidor.sendmail(email_remetente, email_destinatario,
+                          mensagem.as_string())
+        servidor.quit()
+        print("✅ E-mail enviado com sucesso!")
+    except Exception as e:
+        print(f"❌ Erro ao enviar e-mail: {e}")
 
 
 # === Início da execução principal ===
