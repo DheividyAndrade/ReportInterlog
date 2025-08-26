@@ -27,6 +27,8 @@ NOME_ABA = 'Página1'
 ARQUIVO_CHAVE_SALVA = 'chave_acesso.txt'
 
 # ========== SPLASH SCREEN ==========
+
+
 def mostrar_splash():
     splash = tk.Tk()
     splash.overrideredirect(True)
@@ -43,8 +45,15 @@ def mostrar_splash():
     except Exception as e:
         print("Erro ao carregar imagem:", e)
 
-    tk.Label(splash, text="DH Scripts", font=("Helvetica", 24, "bold"), fg="white", bg="black").pack()
-    tk.Label(splash, text="Iniciando...", font=("Helvetica", 12), fg="gray", bg="black").pack(pady=(10, 0))
+    tk.Label(splash, text="DH Scripts", font=(
+        "Helvetica", 24, "bold"), fg="white", bg="black").pack()
+    tk.Label(splash, text="Iniciando...", font=("Helvetica", 12),
+             fg="gray", bg="black").pack(pady=(10, 0))
+    # Contato no canto inferior direito
+    contato_label = tk.Label(splash, text="Cel. (82) 99121-7317",
+                             font=("Helvetica", 10),
+                             fg="white", bg="black")
+    contato_label.place(relx=1.0, rely=1.0, anchor="se", x=-10, y=-10)
 
     def fechar():
         splash.destroy()
@@ -52,22 +61,27 @@ def mostrar_splash():
     splash.after(5000, fechar)
     splash.mainloop()
 
+
 # ========== INÍCIO DO PROGRAMA ==========
 mostrar_splash()
 
 # ========== FUNÇÕES AUXILIARES ==========
 
+
 def carregar_credenciais():
     if not os.path.exists(ARQUIVO_CREDENCIAIS):
-        pyautogui.alert(f"Arquivo de credenciais '{ARQUIVO_CREDENCIAIS}' não encontrado.")
+        pyautogui.alert(
+            f"Arquivo de credenciais '{ARQUIVO_CREDENCIAIS}' não encontrado.")
         return None
     try:
-        creds = service_account.Credentials.from_service_account_file(ARQUIVO_CREDENCIAIS)
+        creds = service_account.Credentials.from_service_account_file(
+            ARQUIVO_CREDENCIAIS)
         service = build('sheets', 'v4', credentials=creds)
         return service
     except Exception as e:
         pyautogui.alert(f"Erro ao carregar as credenciais do Google:\n{e}")
         return None
+
 
 def verificar_chave(chave_usuario):
     service = carregar_credenciais()
@@ -75,15 +89,18 @@ def verificar_chave(chave_usuario):
         return False
     try:
         sheet = service.spreadsheets()
-        resultado = sheet.values().get(spreadsheetId=ID_PLANILHA, range=f"{NOME_ABA}!A2:C").execute()
+        resultado = sheet.values().get(spreadsheetId=ID_PLANILHA,
+                                       range=f"{NOME_ABA}!A2:C").execute()
         valores = resultado.get('values', [])
 
         for linha in valores:
             if len(linha) >= 3:
-                chave, status, data_expiracao = linha[0].strip(), linha[1].strip().lower(), linha[2].strip()
+                chave, status, data_expiracao = linha[0].strip(
+                ), linha[1].strip().lower(), linha[2].strip()
                 if chave_usuario.strip() == chave and status == 'sim':
                     try:
-                        data_exp = datetime.strptime(data_expiracao, "%Y-%m-%d").date()
+                        data_exp = datetime.strptime(
+                            data_expiracao, "%Y-%m-%d").date()
                         hoje = datetime.now().date()
                         if hoje <= data_exp:
                             return True
@@ -91,18 +108,21 @@ def verificar_chave(chave_usuario):
                             pyautogui.alert("❌ Chave expirada.")
                             return False
                     except ValueError:
-                        pyautogui.alert(f"⚠️ Data inválida para a chave '{chave}'.")
+                        pyautogui.alert(
+                            f"⚠️ Data inválida para a chave '{chave}'.")
                         return False
         return False
     except Exception as e:
         pyautogui.alert(f"Erro ao acessar a planilha:\n{e}")
         return False
 
+
 def salvar_chave_local(chave):
     with open(ARQUIVO_CHAVE_SALVA, 'w') as f:
         f.write(chave)
 
 # ========== VERIFICAÇÃO DA CHAVE ==========
+
 
 chave_digitada = pyautogui.prompt("🔐 Digite sua chave de acesso:")
 
@@ -124,6 +144,7 @@ executar_stine = False
 executar_LP = False
 parar_execucao = False
 
+
 def escolher_opcoes():
     def iniciar():
         global executar_corteva, executar_stine, executar_LP
@@ -131,7 +152,8 @@ def escolher_opcoes():
         executar_stine = var_stine.get()
         executar_LP = var_LP.get()
         if not executar_corteva and not executar_stine and not executar_LP:
-            messagebox.showwarning("Atenção", "Você precisa selecionar ao menos uma opção.")
+            messagebox.showwarning(
+                "Atenção", "Você precisa selecionar ao menos uma opção.")
         else:
             janela.destroy()
 
@@ -145,12 +167,16 @@ def escolher_opcoes():
     var_stine = tk.BooleanVar()
     var_LP = tk.BooleanVar()
 
-    tk.Checkbutton(janela, text="Corteva + WhatsApp", variable=var_corteva).pack(anchor='w', padx=20)
-    tk.Checkbutton(janela, text="Stine + WhatsApp", variable=var_stine).pack(anchor='w', padx=20)
-    tk.Checkbutton(janela, text="LP + WhatsApp", variable=var_LP).pack(anchor='w', padx=20)
+    tk.Checkbutton(janela, text="Corteva + WhatsApp",
+                   variable=var_corteva).pack(anchor='w', padx=20)
+    tk.Checkbutton(janela, text="Stine + WhatsApp",
+                   variable=var_stine).pack(anchor='w', padx=20)
+    tk.Checkbutton(janela, text="LP + WhatsApp",
+                   variable=var_LP).pack(anchor='w', padx=20)
 
     tk.Button(janela, text="Iniciar", command=iniciar).pack(pady=20)
     janela.mainloop()
+
 
 def interface_parada():
     def parar():
@@ -162,10 +188,12 @@ def interface_parada():
     janela_parada.title("Controle de Execução")
     janela_parada.geometry("250x100")
     tk.Label(janela_parada, text="Clique para parar o processo.").pack(pady=10)
-    tk.Button(janela_parada, text="Parar Agora", command=parar, fg="white", bg="red").pack()
+    tk.Button(janela_parada, text="Parar Agora",
+              command=parar, fg="white", bg="red").pack()
     janela_parada.mainloop()
 
 # ... suas funções corteva(), Stine(), LP(), whatsapp(), Lembrar_Amanda() continuam exatamente como estão ...
+
 
 def corteva():
     # Seu código pyautogui para Corteva aqui
@@ -417,7 +445,8 @@ def Lembrar_Amanda():
 escolher_opcoes()
 
 if not executar_corteva and not executar_stine and not executar_LP:
-    pyautogui.alert("Nenhuma opção foi selecionada. O programa será encerrado.", title="Aviso", button="OK")
+    pyautogui.alert(
+        "Nenhuma opção foi selecionada. O programa será encerrado.", title="Aviso", button="OK")
     exit()
 
 threading.Thread(target=interface_parada, daemon=True).start()
@@ -425,7 +454,8 @@ threading.Thread(target=interface_parada, daemon=True).start()
 horarios_execucao = [time(h, 30) for h in range(8, 24, 2)]
 horarios_execucao.append(time(0, 30))
 
-horarios_lembrete_amanda = [(datetime.combine(datetime.today(), h) - timedelta(minutes=5)).time() for h in horarios_execucao]
+horarios_lembrete_amanda = [(datetime.combine(
+    datetime.today(), h) - timedelta(minutes=5)).time() for h in horarios_execucao]
 
 ultimo_horario_executado = None
 ultimo_lembrete_amanda = None
@@ -439,7 +469,8 @@ while not parar_execucao:
         ultimo_lembrete_amanda = hora_atual
 
     if hora_atual in horarios_execucao and hora_atual != ultimo_horario_executado:
-        pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!", title="Alerta", button="OK")
+        pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!",
+                        title="Alerta", button="OK")
 
         if executar_corteva:
             corteva()
@@ -456,7 +487,8 @@ while not parar_execucao:
             whatsapp()
             sleep(0.3)
 
-        pyautogui.alert("O REPORT FOI LANÇADO COM SUCESSO!", title="Alerta", button="OK")
+        pyautogui.alert("O REPORT FOI LANÇADO COM SUCESSO!",
+                        title="Alerta", button="OK")
 
         ultimo_horario_executado = hora_atual
 
@@ -474,4 +506,3 @@ while not parar_execucao:
 pyautogui.alert("Execução finalizada manualmente.",
                 title="Encerrado", button="OK")
 print("Programa encerrado.")
-
