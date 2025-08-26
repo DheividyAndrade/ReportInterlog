@@ -448,7 +448,6 @@ while not parar_execucao:
 
     # Lembrar Amanda 5 minutos antes
     if hora_atual in horarios_lembrete_amanda and hora_atual != ultimo_lembrete_amanda:
-        pyautogui.alert("Lembrando a Amanda...", title="Alerta", button="OK")
         Lembrar_Amanda()
         print("Lembrei Amanda!")
         ultimo_lembrete_amanda = hora_atual
