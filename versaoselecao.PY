@@ -30,11 +30,11 @@ ARQUIVO_CHAVE_SALVA = 'chave_acesso.txt'
 def mostrar_splash():
     splash = tk.Tk()
     splash.overrideredirect(True)
-    splash.geometry("400x150+500+300")  # Centraliza
+    splash.geometry("400x300+500+300")  # Centraliza
     splash.configure(bg="black")
 
     try:
-        imagem = Image.open("logo.png")
+        imagem = Image.open("logo.jpg")
         imagem = imagem.resize((100, 100))
         imagem_tk = ImageTk.PhotoImage(imagem)
         label_img = tk.Label(splash, image=imagem_tk, bg="black")
