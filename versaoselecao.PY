@@ -27,6 +27,7 @@ from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from datetime import time
 
 # ========== CONFIG ==========
 
@@ -392,7 +393,7 @@ def Lembrar_Amanda():
     senha = "vlpn jeuk bslb jeso"  # não é a senha normal! É a senha de APP do Gmail
 
     # Configurações do destinatário (quem recebe)
-    email_destinatario = "deividyandrade@hotmail.com"
+    email_destinatario = "pcl.rv@interlogsolucoes.com.br"
 
     # Criando o e-mail
     mensagem = MIMEMultipart()
