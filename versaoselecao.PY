@@ -1,19 +1,12 @@
+# === IMPORTS ===
 from datetime import datetime, time, timedelta
-from datetime import datetime, time
 import pyautogui
 from time import sleep
 import tkinter as tk
-from tkinter import messagebox
-import threading
-import tkinter as tk
-from tkinter import scrolledtext
+from tkinter import messagebox, scrolledtext, ttk
+from PIL import Image, ImageTk
 import threading
 import queue
-import time
-import pyautogui._pyautogui_win
-import random
-from tkinter import ttk
-from tkinter import messagebox
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import os
@@ -21,64 +14,76 @@ import json
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import requests
-from google.oauth2.service_account import Credentials
 import sys
-from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from datetime import time
 
 # ========== CONFIG ==========
 
-# Nome do seu JSON de credenciais
 ARQUIVO_CREDENCIAIS = 'soy-surge-397101-970c2a316ba9.json'
-# ID da sua planilha Google
 ID_PLANILHA = '1M-VbVx94Y86uNnBUXDjPoEk1VB4kF6YyIQ8n9nkad2k'
-NOME_ABA = 'Página1'  # Nome da aba na planilha
+NOME_ABA = 'Página1'
 ARQUIVO_CHAVE_SALVA = 'chave_acesso.txt'
 
-# ====================== FUNÇÕES ======================
+# ========== SPLASH SCREEN ==========
+def mostrar_splash():
+    splash = tk.Tk()
+    splash.overrideredirect(True)
+    splash.geometry("400x150+500+300")  # Centraliza
+    splash.configure(bg="black")
 
+    try:
+        imagem = Image.open("logo.png")
+        imagem = imagem.resize((100, 100))
+        imagem_tk = ImageTk.PhotoImage(imagem)
+        label_img = tk.Label(splash, image=imagem_tk, bg="black")
+        label_img.image = imagem_tk
+        label_img.pack(pady=(30, 10))
+    except Exception as e:
+        print("Erro ao carregar imagem:", e)
+
+    tk.Label(splash, text="DH Scripts", font=("Helvetica", 24, "bold"), fg="white", bg="black").pack()
+    tk.Label(splash, text="Iniciando...", font=("Helvetica", 12), fg="gray", bg="black").pack(pady=(10, 0))
+
+    def fechar():
+        splash.destroy()
+
+    splash.after(5000, fechar)
+    splash.mainloop()
+
+# ========== INÍCIO DO PROGRAMA ==========
+mostrar_splash()
+
+# ========== FUNÇÕES AUXILIARES ==========
 
 def carregar_credenciais():
     if not os.path.exists(ARQUIVO_CREDENCIAIS):
-        pyautogui.alert(
-            f"Arquivo de credenciais '{ARQUIVO_CREDENCIAIS}' não encontrado.")
+        pyautogui.alert(f"Arquivo de credenciais '{ARQUIVO_CREDENCIAIS}' não encontrado.")
         return None
     try:
-        creds = Credentials.from_service_account_file(ARQUIVO_CREDENCIAIS)
+        creds = service_account.Credentials.from_service_account_file(ARQUIVO_CREDENCIAIS)
         service = build('sheets', 'v4', credentials=creds)
         return service
     except Exception as e:
         pyautogui.alert(f"Erro ao carregar as credenciais do Google:\n{e}")
         return None
 
-
 def verificar_chave(chave_usuario):
     service = carregar_credenciais()
     if not service:
         return False
-
     try:
         sheet = service.spreadsheets()
-        resultado = sheet.values().get(spreadsheetId=ID_PLANILHA,
-                                       range=f"{NOME_ABA}!A2:C").execute()
+        resultado = sheet.values().get(spreadsheetId=ID_PLANILHA, range=f"{NOME_ABA}!A2:C").execute()
         valores = resultado.get('values', [])
 
         for linha in valores:
-            print("Linha lida:", linha)
             if len(linha) >= 3:
-                chave, status, data_expiracao = linha[0].strip(
-                ), linha[1].strip().lower(), linha[2].strip()
-                print(
-                    f"Comparando chave {chave_usuario.strip()} com {chave} | Status: {status} | Expira: {data_expiracao}")
-
+                chave, status, data_expiracao = linha[0].strip(), linha[1].strip().lower(), linha[2].strip()
                 if chave_usuario.strip() == chave and status == 'sim':
-                    # Verifica validade da data
                     try:
-                        data_exp = datetime.strptime(
-                            data_expiracao, "%Y-%m-%d").date()
+                        data_exp = datetime.strptime(data_expiracao, "%Y-%m-%d").date()
                         hoje = datetime.now().date()
                         if hoje <= data_exp:
                             return True
@@ -86,22 +91,18 @@ def verificar_chave(chave_usuario):
                             pyautogui.alert("❌ Chave expirada.")
                             return False
                     except ValueError:
-                        pyautogui.alert(
-                            f"⚠️ Data inválida na planilha para a chave '{chave}'.")
+                        pyautogui.alert(f"⚠️ Data inválida para a chave '{chave}'.")
                         return False
-
         return False
     except Exception as e:
         pyautogui.alert(f"Erro ao acessar a planilha:\n{e}")
         return False
 
-
 def salvar_chave_local(chave):
     with open(ARQUIVO_CHAVE_SALVA, 'w') as f:
         f.write(chave)
 
-# ====================== VERIFICAÇÃO ======================
-
+# ========== VERIFICAÇÃO DA CHAVE ==========
 
 chave_digitada = pyautogui.prompt("🔐 Digite sua chave de acesso:")
 
@@ -112,18 +113,16 @@ if not chave_digitada:
 if verificar_chave(chave_digitada):
     salvar_chave_local(chave_digitada)
     pyautogui.alert("✅ Chave válida! Bot liberado!")
-    # Aqui você chama o seu bot
-    # os.system("seu_bot.exe")
 else:
     pyautogui.alert("❌ Chave inválida, inativa ou expirada. Bot bloqueado.")
     sys.exit()
 
+# ========== FLUXO PRINCIPAL ==========
 
 executar_corteva = False
 executar_stine = False
 executar_LP = False
 parar_execucao = False
-
 
 def escolher_opcoes():
     def iniciar():
@@ -132,8 +131,7 @@ def escolher_opcoes():
         executar_stine = var_stine.get()
         executar_LP = var_LP.get()
         if not executar_corteva and not executar_stine and not executar_LP:
-            messagebox.showwarning(
-                "Atenção", "Você precisa selecionar ao menos uma opção.")
+            messagebox.showwarning("Atenção", "Você precisa selecionar ao menos uma opção.")
         else:
             janela.destroy()
 
@@ -147,16 +145,12 @@ def escolher_opcoes():
     var_stine = tk.BooleanVar()
     var_LP = tk.BooleanVar()
 
-    tk.Checkbutton(janela, text="Corteva + WhatsApp",
-                   variable=var_corteva).pack(anchor='w', padx=20)
-    tk.Checkbutton(janela, text="Stine + WhatsApp",
-                   variable=var_stine).pack(anchor='w', padx=20)
-    tk.Checkbutton(janela, text="LP + WhatsApp",
-                   variable=var_LP).pack(anchor='w', padx=20)
+    tk.Checkbutton(janela, text="Corteva + WhatsApp", variable=var_corteva).pack(anchor='w', padx=20)
+    tk.Checkbutton(janela, text="Stine + WhatsApp", variable=var_stine).pack(anchor='w', padx=20)
+    tk.Checkbutton(janela, text="LP + WhatsApp", variable=var_LP).pack(anchor='w', padx=20)
 
     tk.Button(janela, text="Iniciar", command=iniciar).pack(pady=20)
     janela.mainloop()
-
 
 def interface_parada():
     def parar():
@@ -168,10 +162,10 @@ def interface_parada():
     janela_parada.title("Controle de Execução")
     janela_parada.geometry("250x100")
     tk.Label(janela_parada, text="Clique para parar o processo.").pack(pady=10)
-    tk.Button(janela_parada, text="Parar Agora",
-              command=parar, fg="white", bg="red").pack()
+    tk.Button(janela_parada, text="Parar Agora", command=parar, fg="white", bg="red").pack()
     janela_parada.mainloop()
 
+# ... suas funções corteva(), Stine(), LP(), whatsapp(), Lembrar_Amanda() continuam exatamente como estão ...
 
 def corteva():
     # Seu código pyautogui para Corteva aqui
@@ -418,26 +412,20 @@ def Lembrar_Amanda():
         print(f"❌ Erro ao enviar e-mail: {e}")
 
 
-# === Início da execução principal ===
+# === CONTINUAÇÃO DA EXECUÇÃO ===
 
 escolher_opcoes()
 
 if not executar_corteva and not executar_stine and not executar_LP:
-    pyautogui.alert(
-        "Nenhuma opção foi selecionada. O programa será encerrado.", title="Aviso", button="OK")
+    pyautogui.alert("Nenhuma opção foi selecionada. O programa será encerrado.", title="Aviso", button="OK")
     exit()
 
 threading.Thread(target=interface_parada, daemon=True).start()
 
-# Horários principais de execução: 08:30, 10:30, ..., 22:30, 00:30
 horarios_execucao = [time(h, 30) for h in range(8, 24, 2)]
 horarios_execucao.append(time(0, 30))
 
-# Horários de lembrete para Amanda (5 minutos antes dos principais)
-horarios_lembrete_amanda = [
-    (datetime.combine(datetime.today(), h) - timedelta(minutes=5)).time()
-    for h in horarios_execucao
-]
+horarios_lembrete_amanda = [(datetime.combine(datetime.today(), h) - timedelta(minutes=5)).time() for h in horarios_execucao]
 
 ultimo_horario_executado = None
 ultimo_lembrete_amanda = None
@@ -446,37 +434,29 @@ while not parar_execucao:
     agora = datetime.now().time()
     hora_atual = time(agora.hour, agora.minute)
 
-    # Lembrar Amanda 5 minutos antes
     if hora_atual in horarios_lembrete_amanda and hora_atual != ultimo_lembrete_amanda:
         Lembrar_Amanda()
-        print("Lembrei Amanda!")
         ultimo_lembrete_amanda = hora_atual
 
-    # Executar relatórios nos horários exatos
     if hora_atual in horarios_execucao and hora_atual != ultimo_horario_executado:
-        pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!",
-                        title="Alerta", button="OK")
+        pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!", title="Alerta", button="OK")
 
         if executar_corteva:
             corteva()
             whatsapp()
-            print('Report Corteva Enviado')
             sleep(0.3)
 
         if executar_stine:
             Stine()
             whatsapp()
-            print('Report Stine Enviado')
             sleep(0.3)
 
         if executar_LP:
             LP()
             whatsapp()
-            print('Report LP Enviado')
             sleep(0.3)
 
-        pyautogui.alert("O REPORT FOI LANÇADO COM SUCESSO!",
-                        title="Alerta", button="OK")
+        pyautogui.alert("O REPORT FOI LANÇADO COM SUCESSO!", title="Alerta", button="OK")
 
         ultimo_horario_executado = hora_atual
 
@@ -494,3 +474,4 @@ while not parar_execucao:
 pyautogui.alert("Execução finalizada manualmente.",
                 title="Encerrado", button="OK")
 print("Programa encerrado.")
+
