@@ -18,6 +18,7 @@ import sys
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from threading import Thread
 
 # ========== CONFIG ==========
 
@@ -440,23 +441,36 @@ def Lembrar_Amanda():
         print(f"❌ Erro ao enviar e-mail: {e}")
 
 
-def alerta_com_fechamento():
-    def fechar_depois():
-        time.sleep(5)
-        pyautogui.press('enter')
+def mostrar_alerta(mensagem, cor_fundo):
+    def janela():
+        root = tk.Tk()
+        root.overrideredirect(True)  # Remove bordas
+        root.attributes("-topmost", True)  # Sempre na frente
+        root.configure(bg=cor_fundo)
 
-    threading.Thread(target=fechar_depois).start()
-    pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!", title="Alerta", button="OK")
+        # Centralizar a janela
+        largura, altura = 400, 100
+        x = (root.winfo_screenwidth() // 2) - (largura // 2)
+        y = (root.winfo_screenheight() // 2) - (altura // 2)
+        root.geometry(f"{largura}x{altura}+{x}+{y}")
 
-def alerta_com_fechamento2():
-    def fechar_depois():
-        time.sleep(5)
-        pyautogui.press('enter')
+        label = tk.Label(
+            root,
+            text=mensagem,
+            font=("Arial", 16, "bold"),
+            fg="white",
+            bg=cor_fundo
+        )
+        label.pack(expand=True, fill="both")
 
-    threading.Thread(target=fechar_depois).start()
-    pyautogui.alert("REPORT ENVIADO!", title="Alerta", button="OK")
+        # Fecha sozinho em 5 segundos
+        root.after(5000, root.destroy)
+        root.mainloop()
+
+    Thread(target=janela, daemon=True).start()
 
 # === CONTINUAÇÃO DA EXECUÇÃO ===
+
 
 escolher_opcoes()
 
@@ -486,8 +500,8 @@ while not parar_execucao:
 
     if hora_atual in horarios_execucao and hora_atual != ultimo_horario_executado:
 
-        pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!", title="Alerta", button="OK")
-    
+        mostrar_alerta("REPORTE SERÁ INICIALIZADO!", "red")
+        sleep(6)
         if executar_corteva:
             corteva()
             whatsapp()
@@ -503,8 +517,7 @@ while not parar_execucao:
             whatsapp()
             sleep(0.3)
 
-        s
-        pyautogui.alert("REPORT LANÇADO!", title="Alerta", button="OK")
+        mostrar_alerta("REPORT ENVIADO!", "green")
 
         ultimo_horario_executado = hora_atual
 
