@@ -10,10 +10,7 @@ def fechar_alerta():
     time.sleep(5)
     pyautogui.press('enter')
     exit()
-
-
-
-
+    
 # Inicia as threads
 threading.Thread(target=alerta).start()
 threading.Thread(target=fechar_alerta).start()
