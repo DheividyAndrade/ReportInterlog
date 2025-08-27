@@ -3,15 +3,15 @@ import time
 import threading
 
 
-def alerta():
-    pyautogui.alert("Nenhuma opção foi selecionada. O programa será encerrado.", title="Aviso", button="OK")
 
-def fechar_alerta():
-    time.sleep(5)
-    pyautogui.press('enter')
-    exit()
-    
-# Inicia as threads
-threading.Thread(target=alerta).start()
-threading.Thread(target=fechar_alerta).start()
+def alerta_com_fechamento():
+    def fechar_depois():
+        time.sleep(5)
+        pyautogui.press('enter')
 
+    threading.Thread(target=fechar_depois).start()
+    pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!", title="Alerta", button="OK")
+
+
+
+threading.Thread(target=alerta_com_fechamento).start()

@@ -440,18 +440,21 @@ def Lembrar_Amanda():
         print(f"❌ Erro ao enviar e-mail: {e}")
 
 
-def alerta():
-    pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!",
-                        title="Alerta", button="OK")
+def alerta_com_fechamento():
+    def fechar_depois():
+        time.sleep(5)
+        pyautogui.press('enter')
 
-def alerta2():
-    pyautogui.alert("O REPORT FOI LANÇADO COM SUCESSO!",
-                        title="Alerta", button="OK")
+    threading.Thread(target=fechar_depois).start()
+    pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!", title="Alerta", button="OK")
 
-def fechar_alerta():
-    time.sleep(5)
-    pyautogui.press('enter')
-    exit()
+def alerta_com_fechamento2():
+    def fechar_depois():
+        time.sleep(5)
+        pyautogui.press('enter')
+
+    threading.Thread(target=fechar_depois).start()
+    pyautogui.alert("REPORT ENVIADO!", title="Alerta", button="OK")
 
 # === CONTINUAÇÃO DA EXECUÇÃO ===
 
@@ -484,9 +487,8 @@ while not parar_execucao:
     if hora_atual in horarios_execucao and hora_atual != ultimo_horario_executado:
 
         # Inicia as threads
-        threading.Thread(target=alerta).start()
-        threading.Thread(target=fechar_alerta).start()
-
+        threading.Thread(target=alerta_com_fechamento).start()
+    
         if executar_corteva:
             corteva()
             whatsapp()
@@ -503,9 +505,7 @@ while not parar_execucao:
             sleep(0.3)
 
         # Inicia as threads
-        threading.Thread(target=alerta2).start()
-        threading.Thread(target=fechar_alerta).start()
-
+        threading.Thread(target=alerta_com_fechamento2).start()
 
         ultimo_horario_executado = hora_atual
 
