@@ -518,7 +518,7 @@ while not parar_execucao:
             sleep(0.3)
 
         mostrar_alerta("REPORT ENVIADO!", "green")
-
+         
         ultimo_horario_executado = hora_atual
 
         # Aguarda 5 minutos antes de permitir nova execução
