@@ -486,8 +486,7 @@ while not parar_execucao:
 
     if hora_atual in horarios_execucao and hora_atual != ultimo_horario_executado:
 
-        # Inicia as threads
-        threading.Thread(target=alerta_com_fechamento).start()
+        pyautogui.alert("O REPORT SERÁ LANÇADO AGORA!", title="Alerta", button="OK")
     
         if executar_corteva:
             corteva()
@@ -504,8 +503,8 @@ while not parar_execucao:
             whatsapp()
             sleep(0.3)
 
-        # Inicia as threads
-        threading.Thread(target=alerta_com_fechamento2).start()
+        s
+        pyautogui.alert("REPORT LANÇADO!", title="Alerta", button="OK")
 
         ultimo_horario_executado = hora_atual
 
