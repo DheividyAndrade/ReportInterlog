@@ -5,7 +5,7 @@ a = Analysis(
     ['versaoselecao.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('logo.jpg', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
