@@ -405,7 +405,7 @@ def whatsapp():
     sleep(1)
     pyautogui.press('enter')
     sleep(0.5)
-    pyautogui.click(751, 21, duration=0.5)
+    pyautogui.click(751, 21)
     sleep(1)
     pyautogui.hotkey('alt', 'f4')
 
