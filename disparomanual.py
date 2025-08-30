@@ -1,4 +1,3 @@
-# === IMPORTS ===
 from datetime import datetime, time, timedelta
 import pyautogui
 from time import sleep
@@ -267,11 +266,11 @@ corteva()
 whatsapp()
 sleep(0.3)
 
-
+'''
 Stine()
 whatsapp()
 sleep(0.3)
-
+'''
 
 LP()
 whatsapp()
