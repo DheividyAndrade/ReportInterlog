@@ -19,7 +19,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from threading import Thread
-
+import time
 
 
 def corteva():
@@ -27,15 +27,15 @@ def corteva():
     print("Executando Corteva...")
     # Coletando Informações Report
     pyautogui.press('win')
-    sleep(1)
+    sleep(0.3)
     pyautogui.typewrite('google')
-    sleep(1)
+    sleep(0.3)
     pyautogui.press('enter')
-    sleep(1)
+    sleep(0.3)
     pyautogui.click(533, 518, duration=0.5)
-    sleep(2)
+    sleep(0.5)
     pyautogui.hotkey('ctrl', 't')
-    sleep(1)
+    sleep(0.3)
     pyautogui.click(328, 491, duration=0.5)
     sleep(5)
     pyautogui.click(82, 115, duration=1)
@@ -88,15 +88,15 @@ def Stine():
     # Seu código pyautogui para Stine aqui
     print("Executando Stine...")
     pyautogui.press('win')
-    sleep(1)
+    sleep(0.3)
     pyautogui.typewrite('google')
-    sleep(1)
+    sleep(0.3)
     pyautogui.press('enter')
-    sleep(1)
+    sleep(0.3)
     pyautogui.click(533, 518, duration=0.5)
-    sleep(2)
+    sleep(0.5)
     pyautogui.hotkey('ctrl', 't')
-    sleep(1)
+    sleep(0.3)
     pyautogui.click(328, 491, duration=0.5)
     sleep(5)
     pyautogui.click(82, 115, duration=1)
@@ -150,17 +150,17 @@ def LP():
     print("Executando Corteva...")
     # Coletando Informações Report
     pyautogui.press('win')
-    sleep(1)
+    sleep(0.3)
     pyautogui.typewrite('google')
-    sleep(1)
+    sleep(0.3)
     pyautogui.press('enter')
-    sleep(1)
+    sleep(0.3)
     pyautogui.click(533, 518, duration=0.5)
-    sleep(2)
+    sleep(0.5)
     pyautogui.hotkey('ctrl', 't')
-    sleep(1)
+    sleep(0.3)
     pyautogui.click(328, 491, duration=0.5)
-    sleep(3)
+    sleep(5)
     pyautogui.click(82, 115, duration=1)
     sleep(2)
 
@@ -264,16 +264,17 @@ def Lembrar_Amanda():
 
 
 corteva()
-whatsapp()
+'''whatsapp()
 sleep(0.3)
 
-'''
+
 Stine()
 whatsapp()
 sleep(0.3)
-'''
+
 
 LP()
 whatsapp()
 sleep(0.3)
 
+'''
