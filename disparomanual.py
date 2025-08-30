@@ -58,11 +58,11 @@ def corteva():
 
     # Abrindo captura
     pyautogui.hotkey('win')
-    sleep(1)
+    sleep(0.3)
     pyautogui.typewrite('ferramenta de captura')
-    sleep(1)
+    sleep(0.5)
     pyautogui.press('enter')
-    sleep(1)
+    sleep(0.3)
     pyautogui.click(491, 503, duration=0.5)
     sleep(1.7)
 
@@ -75,13 +75,13 @@ def corteva():
     pyautogui.press('printscreen')
     sleep(1)
     pyautogui.click(509, 60, duration=0.5)
-    sleep(1)
+    sleep(0.3)
     pyautogui.hotkey('ctrl', 'c')
-    sleep(1)
+    sleep(0.3)
     pyautogui.hotkey('alt', 'f4')
-    sleep(1)
+    sleep(0.5)
     pyautogui.hotkey('tab')
-    sleep(1)
+    sleep(0.3)
     pyautogui.press('enter')
 
 def Stine():
@@ -136,13 +136,13 @@ def Stine():
     pyautogui.press('printscreen')
     sleep(1)
     pyautogui.click(509, 60, duration=0.5)
-    sleep(1)
+    sleep(0.3)
     pyautogui.hotkey('ctrl', 'c')
-    sleep(1)
+    sleep(0.3)
     pyautogui.hotkey('alt', 'f4')
-    sleep(1)
+    sleep(0.5)
     pyautogui.hotkey('tab')
-    sleep(1)
+    sleep(0.3)
     pyautogui.press('enter')
 
 def LP():
@@ -198,13 +198,13 @@ def LP():
     pyautogui.press('printscreen')
     sleep(1)
     pyautogui.click(509, 60, duration=0.5)
-    sleep(1)
+    sleep(0.3)
     pyautogui.hotkey('ctrl', 'c')
-    sleep(1)
+    sleep(0.3)
     pyautogui.hotkey('alt', 'f4')
-    sleep(1)
+    sleep(0.5)
     pyautogui.hotkey('tab')
-    sleep(1)
+    sleep(0.3)
     pyautogui.press('enter')
 
 def whatsapp():
