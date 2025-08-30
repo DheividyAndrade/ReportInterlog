@@ -243,7 +243,7 @@ def corteva():
     # Arrastando print e copiando
     pyautogui.moveTo(33, 234)  # Coordenada inicial
     pyautogui.mouseDown()
-    pyautogui.moveTo(1370, 469, duration=0.5)  # Coordenada final
+    pyautogui.moveTo(1358,597, duration=0.5)  # Coordenada final
     pyautogui.mouseUp()
     sleep(1)
     pyautogui.press('printscreen')
@@ -305,7 +305,7 @@ def Stine():
     # Arrastando print e copiando
     pyautogui.moveTo(33, 234)  # Coordenada inicial
     pyautogui.mouseDown()
-    pyautogui.moveTo(1327, 437, duration=0.5)  # Coordenada final
+    pyautogui.moveTo(1358,597, duration=0.5)  # Coordenada final
     pyautogui.mouseUp()
     sleep(1)
     pyautogui.press('printscreen')
@@ -368,7 +368,7 @@ def LP():
     # Arrastando print e copiando
     pyautogui.moveTo(33, 234)  # Coordenada inicial
     pyautogui.mouseDown()
-    pyautogui.moveTo(1370, 469, duration=0.5)  # Coordenada final
+    pyautogui.moveTo(1358,597, duration=0.5)  # Coordenada final
     pyautogui.mouseUp()
     sleep(1)
     pyautogui.press('printscreen')
