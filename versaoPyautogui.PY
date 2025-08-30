@@ -388,11 +388,11 @@ def whatsapp():
     # Seu código pyautogui para enviar via WhatsApp aqui
     print("Enviando via WhatsApp...")
     # Enviando Report para Whatsapp
-    sleep(1)
+    sleep(0.3)
     pyautogui.hotkey('win')
-    sleep(1)
+    sleep(0.3)
     pyautogui.typewrite('whatsapp')
-    sleep(1)
+    sleep(0.5)
     pyautogui.press('enter')
     sleep(5)
     pyautogui.typewrite('reports')
